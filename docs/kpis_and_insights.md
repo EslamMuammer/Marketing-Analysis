@@ -1,69 +1,56 @@
-# KPIs, Definitions & Business Insights
+This document outlines the key performance indicators (KPIs), metric definitions, and actionable business insights derived from the Marketing analytics dashboard.
 
 ## KPI Reference
 
-Values below are the totals shown on the dashboards (default filter state: all regions, all store types, full date range, no slicer selections). Formula logic is the standard/expected DAX pattern for each metric name — **`TODO`: paste in the exact DAX from Power BI Desktop's Measure pane to confirm/replace the "Expected logic" column below.**
+Values below reflect the overall totals shown on the dashboard (default filter state: all years, all months, all products). Formula logic represents the expected DAX pattern based on the data model — **`TODO`: paste in the exact DAX from Power BI Desktop's Measure pane to confirm/replace the "Expected logic" column below.**
 
-| Measure (`_measures` table) | Value shown | Expected logic | Business meaning |
-|---|---|---|---|
-| **Units Sold** | 825K | `SUM(fact sales[quantity])` | Total product units sold across all transactions |
-| **Sales Value / Net Sales Value** ("Revenue") | 1.7M | `SUMX(fact sales, fact sales[quantity] * RELATED(dim products[product_retail_price]))` | Total gross revenue from sales |
-| **Gross Profit** | 1.1M | `SUMX(fact sales, fact sales[quantity] * (RELATED(dim products[product_retail_price]) - RELATED(dim products[product_cost])))` | Revenue minus cost of goods sold |
-| **Gross Margin %** | 59.7% | `DIVIDE([Gross Profit], [Net Sales Value])` | Profitability efficiency — how much of every revenue dollar is retained after product cost |
-| **Active Customers / # Customers** | 8.84K | `DISTINCTCOUNT(fact sales[customer_id])` | Number of unique customers who made ≥1 purchase in the filtered period |
-| **Return Rate %** | 0.99% | `DIVIDE([Returned Units], [Units Sold])` | Share of sold units that come back as returns — a proxy for product/quality issues |
-| **Returned Units** | 8.3K | `SUM(fact returns[quantity])` | Total units returned |
-| **Returned Value** | — | `SUMX(fact returns, fact returns[quantity] * RELATED(dim products[product_retail_price]))` | Revenue-equivalent value of returned goods |
-| **Return Records** | — | `COUNTROWS(fact returns)` | Number of distinct return transactions/lines |
-| **Sales Value per Customer** | 199.56 | `DIVIDE([Net Sales Value], [Active Customers])` | Average revenue generated per customer |
-| **Units per Customer** | 94.26 | `DIVIDE([Units Sold], [Active Customers])` | Average purchase volume per customer |
-| **Net Units** | — | `TODO` — likely units sold net of returns; confirm exact formula | Net product movement after accounting for returns |
-
-> These 13 measures were confirmed directly by inspecting the Power BI model's field references (`_measures.<name>`) embedded in the report layout — the **names are exact**, but the **formula text** above is the standard/expected pattern for a measure with that name, not a copy of the literal DAX. Please verify and replace with the real formulas from Power BI Desktop → Modeling → Measures.
+| Measure | Value shown | Expected logic | Business meaning |
+| --- | --- | --- | --- |
+| **Views** | 9.079M | `SUM(Fact_EngagementData[Views])` | Total number of times marketing content or product pages were viewed. |
+| **Clicks** | 1.785M | `SUM(Fact_EngagementData[Clicks])` | Total number of clicks on marketing content or links. |
+| **Likes** | 414.12K | `SUM(Fact_EngagementData[Likes])` | Total number of social media and content likes. |
+| **Conversion Rate** | 9.57% | `DIVIDE([Total Purchases], [Total Views])` | The percentage of initial views that successfully resulted in a completed purchase. |
+| **Avg Rating** | 3.69 | `AVERAGE(Fact_CustomerReviews[Rating])` | The average customer satisfaction score (out of 5 stars) across all submitted reviews. |
 
 ## Page-Level KPI Cards
 
 | Page | KPI Cards Shown |
-|---|---|
-| Overview | Units Sold · Revenue · Gross Profit · Gross Margin % · # Customers · Return Rate % |
-| Sales & Product Performance | Units Sold · Revenue · Gross Profit · Gross Margin % · Returned Units |
-| Customer & Store Analytics | # Customers · Sales/Customer · Qty/Customer · Revenue · Units Sold · Gross Profit |
-| Returns & Quality | Returned Units · Returned Value · Return Rate % · Revenue · Units Sold · # Return Records |
+| --- | --- |
+| **Overview** | Conversion Rate · Views · Clicks · Likes · Avg Rating |
+| **Social Media Details** | Views · Clicks · Likes |
+| **Conversion Details** | Conversion Rate |
+| **Customer Review Details** | Avg Rating |
 
 ---
 
 ## Business Insights (Observed from Dashboard)
 
-The insights below describe **what the charts show**. They are intentionally kept close to the data (no unverified causal claims); each is paired with a suggested next step for deeper investigation.
+### 1. High top-of-funnel reach, but steep drop-off to clicks
 
-### 1. Profitability is strong but concentrated by format
-Revenue is dominated by **Supermarket (44.75%)** and **Deluxe Supermarket (37.94%)** store formats, with Gourmet, Mid-Size, and Small Grocery formats together contributing under 20% of revenue.
-> **Next step:** compare *margin %*, not just revenue share, by store type — a smaller format could still be more profitable per square foot. `grocery_sqft` is available in `dim stores` to build a revenue/profit-per-sqft view.
+The brand generates massive visibility with **9.079M Views**, but only **1.785M Clicks** and **414.12K Likes**. The funnel visual confirms a severe drop-off immediately after the "View" stage.
 
-### 2. Regional demand is highly uneven
-**North West** leads all regions at 839.5K in sales — more than 2.6x the second-place region (**South West**, 317.7K). **Central West** trails far behind at just 9.3K.
-> **Next step:** investigate whether this reflects store count/density differences (more stores in North West) or genuinely higher demand per store — normalize by store count or `grocery_sqft` before concluding North West is the strongest market per-store.
+> **Next step:** Investigate content quality and call-to-action (CTA) placement. High views with low clicks suggest that while reach is broad, the content may not be compelling enough to drive users to the next step.
 
-### 3. Returns are concentrated, not evenly spread
-While the overall return rate is low (0.99%), specific stores (**Store 17**, **Store 13**, **Store 11**) and specific brands (**Hermanos**, **Horatio**, **Tri-State**) account for a disproportionate share of return volume.
-> **Next step:** cross-reference top-returned brands against their sales volume — a brand can look "high-return" simply because it also sells the most. Return **rate** by brand (not raw volume) is the fairer comparison; the current "Top Returns Brands" chart uses raw counts.
+### 2. Conversion rates are highly seasonal
 
-### 4. Revenue grows steadily through the year, peaking in Q4
-Both 1997 and 1998 show a consistent step-up from Q1 to Q4, with **Q4 the strongest quarter both years** (151.2K in the trend chart) and November/December the strongest individual months (165K / 175K).
-> **Next step:** confirm whether this is genuine seasonal demand (holiday grocery shopping) or a store-count/expansion effect (more stores open by year-end) — the store `first_opened_date` field can help separate the two.
+The conversion rate peaks sharply in **January (17.31%)** and experiences another smaller spike in **September (12.20%)**, but dips as low as 6.15% in October.
 
-### 5. Customer base is demographically balanced
-Gender split is **49.45% F / 50.55% M**, marital status is **49.59% S / 50.41% M** — there's no strong demographic skew driving the revenue concentration seen in points 1–2. The **"Professional"** occupation segment is the largest revenue contributor (33.18%), followed by **"Skilled Manual"** (24%).
-> **Next step:** pair occupation/income segments with product category preferences (e.g., low-fat, recyclable-packaged items) to see if there's a targetable segment for premium/health-oriented product lines.
+> **Next step:** Analyze the specific campaigns, discounts, or product launches that occurred in January and September to replicate their success during lower-performing months.
 
-### 6. Price and profit scale together, with a few high-value outliers
-The "Revenue vs Gross Profit by Product Price" scatter shows a tight, near-linear relationship for most products, with one clear outlier point at a much higher price/profit level than the rest of the cluster.
-> **Next step:** identify that outlier product specifically and confirm whether it's a data entry issue (e.g., wrong unit of price) or a genuine premium SKU worth featuring/promoting.
+### 3. Product performance is uneven across the funnel
 
----
+The **Hockey Stick** (15.46%) and **Ski Boots** (14.61%) are top performers in converting views to purchases. Conversely, **Swim Goggles** severely lag at a 5.62% conversion rate.
 
-## Suggested Follow-Up Analysis (Not Yet Done — `TODO`)
-- Profit margin normalized by store size (`grocery_sqft`) and by region.
-- Return **rate** (not raw count) by brand and by store, to separate "sells a lot" from "has a quality problem."
-- Cohort/retention view of customers using `acct_open_date` (currently loaded but not visualized).
-- Statistical significance check on the Q4 seasonality pattern once more years of data are available (only 1997–1998 currently in scope).
+> **Next step:** Compare the customer journey duration for low-converting products versus high-converting ones to see if users are spending too much time searching for information on poorly performing product pages.
+
+### 4. Customer satisfaction skews positive, but leaves room for improvement
+
+The overall average rating is **3.69**, with the majority of reviews falling into the 4-star (431) and 5-star (409) buckets. However, there is a noticeable volume of 2-star and 3-star reviews pulling the average down.
+
+> **Next step:** Drill through the "Review Details" table specifically filtering for 1-star and 2-star reviews on products like **Golf Clubs** and **Yoga Mat** (both at a 3.5 average) to identify recurring complaints (e.g., "Not worth the money", "Disappointed with the performance").
+
+### 5. Engagement steadily declines throughout the year
+
+The "Views, Clicks and Likes by Month" chart shows a clear downward trajectory from January to December across all three metrics, with Views dropping from 980K in January to 510K in December.
+
+> **Next step:** Review the marketing budget allocation and campaign scheduling. If ad spend was front-loaded early in the year, this explains the drop; if spend was consistent, it indicates severe ad fatigue.

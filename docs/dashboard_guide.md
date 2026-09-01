@@ -1,96 +1,66 @@
 # Dashboard Guide
 
-The Power BI report (`powerbi/Food_Mart_Retail_Performance.pbix`) has **4 pages**, each with its own KPI cards, visuals, and filter panel. All pages share a common left-hand filter panel (date range, region, product name, store type, product brand, and page-specific slicers like gender or high/low fat, recyclable/not recyclable) so filtering on one page's slicer set stays consistent with the others.
+The Power BI report (`Marketing.pbix`) consists of **4 main pages** providing a comprehensive view of marketing performance and customer lifecycle. All pages share a consistent filtering experience with a left-hand product slicer and top navigation filters (Year, Month), ensuring seamless cross-page analysis.
 
 ---
 
 ## Page 1 — Overview
-![Overview](../assets/screenshots/01_overview.png)
+![Overview](../assets/screenshots/overview.png)
 
-**Purpose:** single-glance business health check for executives/stakeholders.
+**Purpose:** A high-level executive summary combining key metrics across engagement, conversion, and customer satisfaction.
 
-**KPI cards:** Units Sold · Revenue · Gross Profit · Gross Margin % · # Customers · Return Rate %
-
-**Visuals:**
-- **Revenue by 10 top Brands** — horizontal bar, ranks brands by revenue to spot top performers at a glance.
-- **Revenue by Store Type** — donut chart, shows format mix (Supermarket, Deluxe Supermarket, Gourmet Supermarket, Mid-Size Grocery, Small Grocery).
-- **Sales by Region** — horizontal bar, regional demand comparison.
-- **Revenue vs Gross Profit** — dual-line/bar combo by month, tracks the relationship between top-line revenue and bottom-line profit through the year.
-- **Revenue Trend** — line chart by quarter, split by year (1997 vs 1998), for year-over-year seasonal comparison.
-
-**Filters available:** Date range slider, Region, Store Type, Product Brand.
-
-**How to use it:** Start here to get overall figures, then click into a bar/slice (e.g., a specific region or store type) to cross-filter every visual on the page and jump to a deeper page for that same selection.
+* **KPI cards:** Conversion Rate (9.57%) · Views (9.079M) · Clicks (1.785M) · Likes (414.12K) · Avg Rating (3.69)
+* **Visuals:**
+  * **Conversion Rate by Month & Avg Rating by Month:** Line charts showing the historical trend of conversions and ratings.
+  * **Views, Clicks and Likes by Month:** A line chart comparing the three engagement metrics over time.
+  * **Views, Clicks and Likes (Funnel):** A horizontal funnel/bar chart illustrating the drop-off from Views (100%) to Clicks (1.8M) to Likes (0.4M).
+  * **Top Performers (Column Charts):** Two column charts highlighting `Conversion Rate by ProductName` and `Rating (Average) by ProductName` for quick identification of top-performing items.
+* **Filters available:** Year (2023, 2024, 2025), Month (Jan-Dec), Product Name (Checkboxes).
+* **How to use it:** Use this page for a single-glance business health check. Identify macro trends before diving into the specific detail pages.
 
 ---
 
-## Page 2 — Sales & Product Performance
-![Sales & Product Performance](../assets/screenshots/02_sales_product_performance.png)
+## Page 2 — Social Media Details
+![Social Media Details](../assets/screenshots/social_media_details.png)
 
-**Purpose:** identify which products, brands, and price points are driving (or dragging down) sales and profit.
+**Purpose:** Evaluate top-of-funnel marketing performance and track user engagement across different content channels.
 
-**KPI cards:** Units Sold · Revenue · Gross Profit · Gross Margin % · Returned Units
-
-**Visuals:**
-- **Revenue by 15 top Products** — horizontal bar ranking individual SKUs (e.g., "Rye Bread", "Thai Rice") by revenue.
-- **Top 10 Product Brand Performance** — dual bar (Net Sales Value vs. Gross Profit) per brand, for comparing revenue-generation vs. profit-generation by brand.
-- **Sales by Product Characteristics** — stacked bar comparing Not Recyclable/Recyclable across High Fat/Low Fat segments — a quick view of packaging and nutrition-attribute mix.
-- **Revenue vs Gross Profit by Product Price** — scatter plot, each point a product priced along the x-axis (revenue) vs. y-axis (gross profit), sized/labeled by price point — reveals the price-to-profitability curve and any outliers.
-- **Revenue Trend (table)** — a sortable, conditionally-formatted table by `product_brand` showing Net Units, Net Sales Value, Gross Profit, Returned Value, and Return Rate % side by side — the most granular view in the whole report, useful for brand-level deep dives.
-
-**Filters available:** Date range, Region, Product Name, High Fat/Low Fat toggle, Not Recyclable/Recyclable toggle, Store Type, Product Brand.
-
-**How to use it:** Use the table on the bottom-right as the analytical anchor — sort by Return Rate % or Gross Profit to find brands that need attention, then cross-reference against the bar charts above for context.
+* **KPI cards:** Views (9.079M) · Clicks (1.785M) · Likes (414.1K)
+* **Visuals:**
+  * **Views by MonthNameShort and ContentType:** A clustered column chart comparing engagement across Blog, Social Media, and Video formats over time.
+  * **Views, Clicks and likes by Month:** A trend line chart tracking the overall trajectory of all three engagement metrics throughout the year.
+  * **Product Engagement Matrix:** A conditionally formatted table breaking down raw engagement numbers per product across each month.
+* **Filters available:** Year (2023, 2024, 2025), Month (Jan-Dec), Product Name (Checkboxes).
+* **How to use it:** Gauge overall brand reach. Use the Product Name slicer to isolate specific items and see which content type drives the most traffic for that product.
 
 ---
 
-## Page 3 — Customer & Store Analytics
-![Customer & Store Analytics](../assets/screenshots/03_customer_store_analytics.png)
+## Page 3 — Conversion Details
+![Conversion Details](../assets/screenshots/conversion_details.png)
 
-**Purpose:** understand who the customers are and which stores/regions perform best.
+**Purpose:** Analyze the customer journey funnel to understand where users drop off and which products drive the highest purchasing success.
 
-**KPI cards:** # Customers · Sales/Customer · Qty/Customer · Revenue · Units Sold · Gross Profit
-
-**Visuals:**
-- **Sales by Education** — donut chart across 5 education levels.
-- **Sales by Occupation** — donut chart across 5 occupation categories.
-- **Sales by Gender** — donut chart (F/M split).
-- **Sales by Marital Status** — donut chart (S/M split).
-- **Customer Income vs Sales** — horizontal bar by income band ($10K–$30K through $150K+), shows which income segments drive the most revenue.
-- **Sales by top 10 Stores** — dual bar (Net Sales Value vs. Gross Profit) ranking individual stores.
-- **Sales by Store Type** — donut chart, same format-mix view as the Overview page for consistency.
-- **Sales by Store Size** — scatter plot of stores by `grocery_sqft` (x-axis) vs. Sales (y-axis), useful for spotting whether bigger stores actually sell more, or whether some small stores overperform their footprint.
-
-**Filters available:** Date range, Region, Store Type, Gender toggle, Education, Occupation.
-
-**How to use it:** Pair the demographic donuts with the income-band bar chart to build a customer profile, then check the store-size scatter to see if physical footprint or location matters more than customer mix for a given store's performance.
+* **KPI cards:** Conversion Rate (9.57%)
+* **Visuals:**
+  * **Number of Customer Journeys by Action:** A funnel chart visualizing the drop-off at each stage: View (100%) -> Click -> Drop-off -> Purchase (9.6%).
+  * **Conversion Rate by Month:** A line chart displaying how conversion efficiency fluctuates over time.
+  * **Conversion Rate by ProductName:** A horizontal bar chart ranking products by their ability to convert (e.g., Hockey Stick at 15.46%).
+  * **Conversion Matrix:** A detailed table showing the month-by-month conversion percentage for every single product in the catalog.
+* **Filters available:** Year (2023, 2024, 2025), Month (Jan-Dec), Product Name (Checkboxes).
+* **How to use it:** Identify funnel bottlenecks using the Funnel chart, then utilize the horizontal bar chart to find which products over-perform the 9.57% average.
 
 ---
 
-## Page 4 — Returns & Quality
-![Returns & Quality](../assets/screenshots/04_returns_quality.png)
+## Page 4 — Customer Review Details
+![Customer Review Details](../assets/screenshots/customer_review_details.png)
 
-**Purpose:** monitor product returns as a proxy for quality issues and lost revenue.
+**Purpose:** Monitor brand sentiment, customer satisfaction, and gather qualitative feedback post-purchase.
 
-**KPI cards:** Returned Units · Returned Value · Return Rate % · Revenue · Units Sold · # Return Records
-
-**Visuals:**
-- **Return Trend** — time series of returns (title only in current build — `TODO`: chart appeared empty in the captured screenshot; verify it renders with data/filters applied in Power BI Desktop).
-- **Sales by Occupation** — donut, repeated from page 3 for return-context filtering (`TODO`: same empty-render note as above).
-- **Top Returned Products** — horizontal bar of the 10 most-returned SKUs by unit count (e.g., "Rice Medly", "Wheat Puffs").
-- **Top Returns Brands** — horizontal bar of the top 15 brands by return volume.
-- **Returns by Store** — horizontal bar ranking stores by return volume (Store 17 and Store 13 lead).
-- **Return Rate by Store** — (`TODO`: chart appeared empty in the captured screenshot; verify.)
-- **Returns by Region** — (`TODO`: chart appeared empty in the captured screenshot; verify.)
-- **Returned Value by Product** — horizontal bar of top brands ranked by dollar value of returns, not just unit count — a better proxy for financial impact than raw return counts.
-
-**Filters available:** Date range, Region, Product Name, Store Type, Product Brand.
-
-**How to use it:** Use **Returned Value by Product** (dollar impact) rather than **Top Returned Products** (unit count) when prioritizing which SKUs/brands need a quality or vendor review, since a high-unit-count return on a cheap item may matter less than fewer returns on an expensive one.
-
-> **`TODO` for the analyst:** Three visuals on this page (Return Trend, Sales by Occupation, Return Rate by Store, Returns by Region) rendered without visible data in the screenshot used for this documentation — likely a filter context or a rendering/scroll artifact at capture time. Please re-check these visuals directly in Power BI Desktop and update this guide once confirmed.
-
----
-
-## Cross-Page Navigation
-All four pages share a consistent top navigation bar (Overview / Sales & Product Performance / Customer & Store Analytics / Returns & Quality), letting users move between views without losing their place. Filter panel selections (region, store type, product brand, date range) are page-scoped in the current build — **`TODO`**: confirm whether a "Sync Slicers" configuration is applied so that a region selected on one page carries over to the next, or whether this is intentionally independent per page.
+* **KPI cards:** Avg Rating (3.69)
+* **Visuals:**
+  * **Number of Customer Reviews by Rating:** A column chart showing the distribution of scores from 1 to 5 stars, highlighting that 4-star reviews are the most frequent.
+  * **Avg Rating by Month:** A line chart tracking historical customer satisfaction trends.
+  * **Rating (Average) by ProductName:** A horizontal bar chart ranking products from highest rated to lowest.
+  * **Review Details Table:** A granular, row-level view of actual customer feedback containing ReviewDate, CustomerID, ReviewText, and color-coded Ratings.
+* **Filters available:** Year (2023, 2024, 2025), Month (Jan-Dec), Product Name (Checkboxes).
+* **How to use it:** Cross-reference low-converting products from Page 3 with their average ratings here. Read the specific `ReviewText` to extract actionable product improvements.
