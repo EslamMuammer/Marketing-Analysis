@@ -37,8 +37,6 @@ To ensure optimal performance and scalable reporting, the data was structured us
 ### Customer Review Details
 ![Customer Review Details](assets/screenshots/customer_review_details.png)
 
-Full page-by-page walkthrough (visuals, filters, and how to read each chart) is documented in **[`docs/dashboard_guide.md`](docs/dashboard_guide.md)**.
-
 ---
 
 ## 📈 Dashboard & Key Insights
@@ -58,9 +56,6 @@ Full page-by-page walkthrough (visuals, filters, and how to read each chart) is 
 * **Key Metrics:** Average Rating of **3.69 / 5.0**.
 * **Insights:** Created a distribution of 1-5 star ratings Monitored average rating fluctuations over time and ranked products by average satisfaction score
 
-> Full metric definitions and business interpretation are in **[`docs/kpis_and_insights.md`](docs/kpis_and_insights.md)**.
-
-
 ---
 
 ## 🧱 Data Model
@@ -73,15 +68,3 @@ Star schema with **3 fact tables** and **3 dimension tables**
 ![Data Model](assets/screenshots/data_model.png)
 
 Full relationship cardinalities, keys, and measure list: **[`powerbi/model_documentation.md`](powerbi/model_documentation.md)**.
-
-
-## 📂 Documentation Index
-
-| Document | Purpose |
-|---|---|
-| [`docs/data_dictionary.md`](docs/data_dictionary.md) | Every table and column, source, type, and description |
-| [`docs/methodology.md`](docs/methodology.md) | Step-by-step analytical workflow from raw data to dashboard |
-| [`docs/kpis_and_insights.md`](docs/kpis_and_insights.md) | KPI formulas and what each one means for the business |
-| [`docs/dashboard_guide.md`](docs/dashboard_guide.md) | How to read and use each dashboard page |
-| [`powerbi/model_documentation.md`](powerbi/model_documentation.md) | Data model schema and DAX measure inventory |
-| [`data/README.md`](data/README.md) | Data source, provenance, and licensing notes |
